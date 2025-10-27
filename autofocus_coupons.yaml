@@ -1,19 +1,3 @@
-autofocus:
-  ros__parameters:
-    autofocus_enabled: false
-    control_rate: 10.0
-    data_path: /data/autofocus
-    ehc_distance: 0.05
-    focus_algorithm: default
-    focus_metric: sobel
-    image_topic: /camera/image_raw/compressed
-    object: ''
-    roi_height: 100
-    roi_width: 100
-    roi_x: 0.5
-    roi_y: 0.5
-    save_data: false
-    use_sim_time: false
 gui:
   ros__parameters:
     data_path: /data/ViewpointGenerationData
@@ -37,7 +21,7 @@ inspection_task_planning:
   ros__parameters:
     controller_manager_name: /controller_manager
     data_path: /data/ViewpointGenerationData
-    selected_region: 1
+    selected_region: 0
     selected_viewpoint: 0
     servo_controllers:
     - ur5e_forward_position_controller
@@ -46,22 +30,22 @@ inspection_task_planning:
     trajectory_controllers:
     - inspection_cell_controller
     use_sim_time: false
-    viewpoints_file: /data/ViewpointGenerationData/autofocus_coupons_mm/10000points_regions/2_regions_2_clusters_2025-10-21_17-18-05.json
+    viewpoints_file: /data/ViewpointGenerationData/autofocus_coupons_mm/9998points_regions/2_regions_2_clusters_2025-10-22_21-45-58.json
 viewpoint_generation:
   ros__parameters:
     model.camera.dof: 0.02
-    model.camera.focal_distance: 0.3
+    model.camera.focal_distance: 0.4
     model.camera.fov.height: 0.05
     model.camera.fov.width: 0.05
     model.mesh.file: /data/ViewpointGenerationData/autofocus_coupons.stl
     model.mesh.units: mm
-    model.point_cloud.curvature.file: /data/ViewpointGenerationData/autofocus_coupons_mm/10000points_12nn_curvatures.npy
+    model.point_cloud.curvature.file: ''
     model.point_cloud.curvature.knn_neighbors: 12
     model.point_cloud.curvature.threshold: 0.1
-    model.point_cloud.file: /data/ViewpointGenerationData/autofocus_coupons_mm/10000points.ply
-    model.point_cloud.sampling.number_of_points: 10000
+    model.point_cloud.file: /data/ViewpointGenerationData/autofocus_coupons_mm/9998points.ply
+    model.point_cloud.sampling.number_of_points: 9998
     model.point_cloud.units: m
-    regions.file: /data/ViewpointGenerationData/autofocus_coupons_mm/10000points_regions/2_regions_2_clusters_2025-10-21_17-18-05.json
+    regions.file: /data/ViewpointGenerationData/autofocus_coupons_mm/9998points_regions/2_regions_2_clusters_2025-10-22_21-45-58.json
     regions.fov_clustering.beta_weight: 1.0
     regions.fov_clustering.k-means.maximum_iterations: 100
     regions.fov_clustering.k-means.normal_weight: 1.0
@@ -71,7 +55,7 @@ viewpoint_generation:
     regions.fov_clustering.max_point_out_percentage: 0.001
     regions.region_growth.max_cluster_size: 100000
     regions.region_growth.min_cluster_size: 100
-    regions.region_growth.normal_angle_threshold: 91.80000305175781
+    regions.region_growth.normal_angle_threshold: 112.07499694824219
     regions.region_growth.seed_threshold: 0.1
     settings.cuda_enabled: false
     settings.data_path: /data/ViewpointGenerationData
