@@ -1,12 +1,16 @@
 autofocus:
   ros__parameters:
+    N_ema: 3
     autofocus_enabled: false
     control_rate: 10.0
-    data_path: /data/autofocus
-    ehc_distance: 0.05
+    data_path: /data/AutofocusData
+    ddfv_threshold: -0.2
+    dfv_threshold: 0.2
+    ehc_distance: 0.15
     focus_algorithm: default
     focus_metric: sobel
     image_topic: /camera/image_raw/compressed
+    kv: 0.2
     object: ''
     roi_height: 100
     roi_width: 100
@@ -33,10 +37,56 @@ gui:
     show_skybox: false
     show_viewpoints: false
     use_sim_time: false
+inspection_task_planning:
+  ros__parameters:
+    controller_manager_name: /controller_manager
+    data_path: /data/ViewpointGenerationData
+    selected_region: 0
+    selected_viewpoint: 4
+    servo_controllers:
+    - ur5e_forward_position_controller
+    - turntable_forward_position_controller
+    servo_node_name: servo_node
+    trajectory_controllers:
+    - inspection_cell_controller
+    use_sim_time: false
+    viewpoints_file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_55_clusters_2025-11-21_23-01-56.json
+orientation_controller:
+  ros__parameters:
+    K_rx: 1193.7
+    K_ry: 1193.7
+    K_rz: 1193.7
+    Kd_rx: 72.0
+    Kd_ry: 72.0
+    Kd_rz: 72.0
+    bounding_box_topic: /viewpoint_generation/bounding_box_marker
+    camera_info_topic: /camera/d405_camera/depth/camera_info
+    crop_radius: 0.05
+    crop_z_max: 0.4
+    crop_z_min: 0.05
+    data_path: /data/OrientationControlData
+    depth_topic: /camera/d405_camera/depth/image_rect_raw
+    dmap_filter_max: 0.5
+    dmap_filter_min: 0.07
+    ema_enable: true
+    ema_tau: 0.25
+    main_camera_frame: eoat_camera_link
+    no_target_timeout_s: 0.25
+    object: ''
+    orientation_control_enabled: false
+    pcd_downsampling_stride: 4
+    publish_pointcloud: true
+    publish_zero_when_lost: true
+    save_data: false
+    standoff_m: 0.1
+    standoff_mode: euclidean
+    target_frame: object_frame
+    use_sim_time: false
+    viz_enable: true
 viewpoint_generation:
   ros__parameters:
     model.camera.dof: 0.02
-    model.camera.focal_distance: 0.3
+    model.camera.focal_distance: 0.2
     model.camera.fov.height: 0.05
     model.camera.fov.width: 0.05
     model.mesh.file: /data/ViewpointGenerationData/cylinder.stl
@@ -47,7 +97,7 @@ viewpoint_generation:
     model.point_cloud.file: /data/ViewpointGenerationData/cylinder_mm/10000points.ply
     model.point_cloud.sampling.number_of_points: 10000
     model.point_cloud.units: m
-    regions.file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_55_clusters_2025-10-17_16-33-49_optimized2025-10-17_16-33-52.json
+    regions.file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_55_clusters_2025-11-21_23-01-56.json
     regions.fov_clustering.beta_weight: 1.0
     regions.fov_clustering.k-means.maximum_iterations: 100
     regions.fov_clustering.k-means.normal_weight: 1.0
@@ -65,19 +115,16 @@ viewpoint_generation:
     viewpoints.projection.nothing: ''
     viewpoints.traversal: ''
     visualize: false
-inspection_task_planning:
-  ros__parameters:
-    viewpoints_file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_55_clusters_2025-10-17_16-33-49_optimized2025-10-17_16-33-52.json
-    data_path: /data/ViewpointGenerationData
-    use_sim_time: false
 viewpoint_traversal:
   ros__parameters:
+    clear_paths: false
+    compare: false
+    compare_algorithms: 2opt
     multiplanning: false
     planner: ompl
     planning_group: disc_to_ur5e
-    use_2opt: true
+    tsp_algorithm: greedy
     use_sim_time: false
-    visualize: false
     workspace.max_x: 1.0
     workspace.max_y: 1.0
     workspace.max_z: 1.0
