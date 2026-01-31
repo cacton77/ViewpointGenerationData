@@ -15,14 +15,14 @@ admittance_control:
 gui:
   ros__parameters:
     data_path: /data/ViewpointGenerationData
-    file_name: default
+    file_name: SandiaPart
     show_axes: false
     show_curvatures: false
     show_fov_clusters: false
     show_grid: false
     show_mesh: true
     show_model_bounding_box: false
-    show_noise_points: false
+    show_noise_points: true
     show_path: false
     show_point_cloud: false
     show_region_view_manifolds: false
@@ -47,24 +47,27 @@ inspection_task_planning:
     viewpoints_file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_56_clusters_2026-01-27_22-56-06_optimized2026-01-27_22-56-09.json
 orientation_controller:
   ros__parameters:
-    Kd: 0.99
-    Ki: 0.0
-    Kp: 2.8
+    Kd: 6.2
+    Ki: 37.7
+    Kp: 31.0
+    anti_windup_enabled: true
     bounding_box_topic: /viewpoint_generation/bounding_box_marker
     camera_info_topic: /camera/d405_camera/depth/camera_info
-    crop_radius: 0.05
+    controller_type: PD
+    crop_radius: 0.025
     crop_z_max: 0.4
     crop_z_min: 0.05
     d_max: 0.3
     d_min: 0.15
     data_path: /data/OrientationControlData
-    depth_topic: /camera/d405_camera/depth/image_rect_raw
+    depth_topic: /camera/d405_camera/depth/image_rect_raw/compressedDepth
     dmap_filter_max: 0.5
     dmap_filter_min: 0.07
     ema_enable: true
     ema_tau: 0.5
     enable_button: 0
     fluid_viscosity: 1.0
+    integral_alpha: 5.0
     joy_topic: joy
     main_camera_frame: eoat_camera_link
     no_target_timeout_s: 0.25
@@ -79,7 +82,7 @@ orientation_controller:
     standoff_m: 0.1
     standoff_mode: euclidean
     target_frame: object_frame
-    theta_max_deg: 30.0
+    theta_max_deg: 90.0
     use_sim_time: false
     v_max: 0.4
     viz_enable: true
@@ -115,15 +118,15 @@ viewpoint_generation:
     model.camera.focal_distance: 0.35
     model.camera.fov.height: 0.05
     model.camera.fov.width: 0.05
-    model.mesh.file: /data/ViewpointGenerationData/cylinder.stl
+    model.mesh.file: /data/ViewpointGenerationData/sandia_part.stl
     model.mesh.units: mm
-    model.point_cloud.curvature.file: /data/ViewpointGenerationData/cylinder_mm/10000points_12nn_curvatures.npy
+    model.point_cloud.curvature.file: /data/ViewpointGenerationData/sandia_part_mm/100000points_12nn_curvatures.npy
     model.point_cloud.curvature.knn_neighbors: 12
     model.point_cloud.curvature.threshold: 0.1
-    model.point_cloud.file: /data/ViewpointGenerationData/cylinder_mm/10000points.ply
-    model.point_cloud.sampling.number_of_points: 10000
+    model.point_cloud.file: /data/ViewpointGenerationData/sandia_part_mm/100000points.ply
+    model.point_cloud.sampling.number_of_points: 100000
     model.point_cloud.units: m
-    regions.file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_56_clusters_2026-01-27_22-56-06_optimized2026-01-27_22-56-09.json
+    regions.file: /data/ViewpointGenerationData/sandia_part_mm/100000points_regions/23_regions_33_clusters_2026-01-31_00-07-13.json
     regions.fov_clustering.beta_weight: 1.0
     regions.fov_clustering.k-means.maximum_iterations: 100
     regions.fov_clustering.k-means.normal_weight: 1.0
@@ -133,7 +136,7 @@ viewpoint_generation:
     regions.fov_clustering.max_point_out_percentage: 0.001
     regions.region_growth.max_cluster_size: 100000
     regions.region_growth.min_cluster_size: 100
-    regions.region_growth.normal_angle_threshold: 95.09500122070312
+    regions.region_growth.normal_angle_threshold: 56.03799819946289
     regions.region_growth.seed_threshold: 0.1
     settings.cuda_enabled: false
     settings.data_path: /data/ViewpointGenerationData
