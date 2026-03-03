@@ -17,16 +17,15 @@ gui:
     show_viewpoints: true
 viewpoint_generation:
   ros__parameters:
-    model.mesh.file: /data/ViewpointGenerationData/teapot.stl
-    model.mesh.units: in
+    model.mesh.file: /data/ViewpointGenerationData/suzanne.stl
+    model.mesh.units: m
     model.point_cloud.curvature.file: ''
-    model.point_cloud.file: /data/ViewpointGenerationData/teapot_in/100000points.ply
-    model.point_cloud.sampling.number_of_points: 100000
+    model.point_cloud.file: /data/ViewpointGenerationData/suzanne_m/10000points.ply
+    model.point_cloud.sampling.number_of_points: 10000
     model.point_cloud.units: m
     regions.fov_clustering.beta_weight: 1.0
     regions.fov_clustering.dof: 0.0010000000474974513
-    regions.fov_clustering.fov_height: 0.0010000000474974513
-    regions.fov_clustering.fov_width: 0.0010000000474974513
+    regions.fov_clustering.fov_diameter: 0.029999999329447746
     regions.fov_clustering.lambda_weight: 1.0
     regions.fov_clustering.max_point_out_percentage: 0.001
     regions.fov_clustering.maximum_iterations: 100
@@ -39,17 +38,18 @@ viewpoint_generation:
     regions.region_growth.knn_neighbors: 30
     regions.region_growth.max_cluster_size: 100000
     regions.region_growth.min_cluster_size: 10
-    regions.region_growth.normal_angle_threshold: 0.5235987901687622
+    regions.region_growth.normal_angle_threshold: 1.0471975803375244
     regions.region_growth.outlier_nb_neighbors: 20
     regions.region_growth.outlier_std_ratio: 0.10000000149011612
+    regions.region_growth.radius: 0.009999999776482582
     regions.region_growth.region_threshold: 0.20000000298023224
     regions.region_growth.remove_statistical_outliers: false
     regions.region_growth.seed_threshold: 0.10000000149011612
     regions.region_growth.spatial_hash_resolution: 0.0010000000474974513
     regions.region_growth.use_spatial_hashing: true
-    results.file: /data/ViewpointGenerationData/teapot_in/100000points_results/119_regions_2026-03-02_22-28-52.json
-    settings.data_path: /tmp
+    results.file: /data/ViewpointGenerationData/suzanne_m/10000pointsm_results/28_regions_178_clusters_2026-03-03_06-09-39.json
+    settings.data_path: /data/ViewpointGenerationData
     settings.planning_volume_opacity: 0.0
-    viewpoints.projection.focal_distance: 0.3
+    viewpoints.projection.focal_distance: 0.5440000295639038
     viewpoints.projection.hemisphere_points: 10000
     viewpoints.traversal: ''

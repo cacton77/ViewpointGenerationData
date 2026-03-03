@@ -1,0 +1,7 @@
+gui:
+  ros__parameters:
+    data_path: /data/ViewpointGenerationData
+viewpoint_generation:
+  ros__parameters:
+    settings.data_path: /data/ViewpointGenerationData
+    

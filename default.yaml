@@ -1,160 +1,55 @@
-admittance_control:
-  ros__parameters:
-    fluid_viscosity: 1.0
-    frame_id: eoat_camera_link
-    max_angular_speed: 0.0
-    max_linear_speed: 0.0
-    publish_rate: 10.0
-    sphere_mass: 2.5
-    sphere_radius: 0.65
-    twist_topic: /servo_node/delta_twist_cmds
-    use_sim_time: false
-    wrench_orientation_topic: /orientation_controller/wrench_cmds
-    wrench_teleop_topic: /teleop/wrench_cmds
-    wrench_topic: /teleop/wrench_cmds
 gui:
   ros__parameters:
     data_path: /data/ViewpointGenerationData
     file_name: default
     show_axes: false
-    show_curvatures: false
-    show_fov_clusters: false
+    show_curvatures: true
+    show_fov_clusters: true
     show_grid: false
     show_mesh: true
     show_model_bounding_box: false
-    show_noise_points: false
+    show_noise_points: true
     show_path: false
-    show_point_cloud: false
-    show_region_view_manifolds: false
-    show_regions: false
-    show_reticle: true
-    show_skybox: false
-    show_viewpoints: false
-    use_sim_time: false
-task_planning:
-  ros__parameters:
-    controller_manager_name: /controller_manager
-    data_path: /data/ViewpointGenerationData
-    selected_region: 0
-    selected_viewpoint: 0
-    servo_controllers:
-    - ur5e_forward_position_controller
-    - turntable_forward_position_controller
-    servo_node_name: servo_node
-    trajectory_controllers:
-    - inspection_cell_controller
-    use_sim_time: false
-    viewpoints_file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_56_clusters_2026-01-27_22-56-06_optimized2026-01-27_22-56-09.json
-orientation_controller:
-  ros__parameters:
-    Kd: 0.99
-    Ki: 0.0
-    Kp: 2.8
-    bounding_box_topic: /viewpoint_generation/bounding_box_marker
-    camera_info_topic: /camera/d405_camera/depth/camera_info
-    crop_radius: 0.05
-    crop_z_max: 0.4
-    crop_z_min: 0.05
-    d_max: 0.3
-    d_min: 0.15
-    data_path: /data/OrientationControlData
-    depth_topic: /camera/d405_camera/depth/image_rect_raw
-    dmap_filter_max: 0.5
-    dmap_filter_min: 0.07
-    ema_enable: true
-    ema_tau: 0.5
-    enable_button: 0
-    fluid_viscosity: 1.0
-    joy_topic: joy
-    main_camera_frame: eoat_camera_link
-    no_target_timeout_s: 0.25
-    object: ''
-    orientation_control_enabled: false
-    pcd_downsampling_stride: 4
-    publish_pointcloud: true
-    publish_zero_when_lost: true
-    save_data: false
-    sphere_mass: 2.5
-    sphere_radius: 0.65
-    standoff_m: 0.1
-    standoff_mode: euclidean
-    target_frame: object_frame
-    theta_max_deg: 30.0
-    use_sim_time: false
-    v_max: 0.4
-    viz_enable: true
-teleop:
-  ros__parameters:
-    deadzone: 0.05
-    enable_button: -1
-    force_scale: 5.0
-    frame_id: eoat_camera_link
-    invert_pitch: false
-    invert_roll: false
-    invert_x: true
-    invert_y: true
-    invert_yaw: true
-    invert_z: false
-    joy_topic: /joy
-    pitch_axis: 4
-    publish_rate: 10.0
-    roll_axis_negative: 2
-    roll_axis_positive: 3
-    torque_scale: 5.0
-    twist_topic: /teleop/wrench_cmds
-    use_sim_time: false
-    x_axis: 0
-    y_axis: 1
-    yaw_axis: 3
-    z_axis: -1
-    z_axis_pull: 2
-    z_axis_push: 5
+    show_point_cloud: true
+    show_region_view_manifolds: true
+    show_regions: true
+    show_skybox: true
+    show_viewpoints: true
 viewpoint_generation:
   ros__parameters:
-    model.camera.dof: 0.02
-    model.camera.focal_distance: 0.35
-    model.camera.fov.height: 0.05
-    model.camera.fov.width: 0.05
-    model.mesh.file: /data/ViewpointGenerationData/cylinder.stl
+    model.mesh.file: /data/ViewpointGenerationData/stanford_bunny.stl
     model.mesh.units: mm
-    model.point_cloud.curvature.file: /data/ViewpointGenerationData/cylinder_mm/10000points_12nn_curvatures.npy
-    model.point_cloud.curvature.knn_neighbors: 12
-    model.point_cloud.curvature.threshold: 0.1
-    model.point_cloud.file: /data/ViewpointGenerationData/cylinder_mm/10000points.ply
-    model.point_cloud.sampling.number_of_points: 10000
+    model.point_cloud.curvature.file: ''
+    model.point_cloud.file: /data/ViewpointGenerationData/stanford_bunny_mm/10000points.ply
+    model.point_cloud.sampling.number_of_points: 100000
     model.point_cloud.units: m
-    regions.file: /data/ViewpointGenerationData/cylinder_mm/10000points_regions/2_regions_56_clusters_2026-01-27_22-56-06_optimized2026-01-27_22-56-09.json
     regions.fov_clustering.beta_weight: 1.0
-    regions.fov_clustering.k-means.maximum_iterations: 100
-    regions.fov_clustering.k-means.normal_weight: 1.0
-    regions.fov_clustering.k-means.number_of_runs: 9
-    regions.fov_clustering.k-means.point_weight: 1.0
+    regions.fov_clustering.dof: 0.0010000000474974513
+    regions.fov_clustering.fov_diameter: 0.029999999329447746
     regions.fov_clustering.lambda_weight: 1.0
     regions.fov_clustering.max_point_out_percentage: 0.001
+    regions.fov_clustering.maximum_iterations: 100
+    regions.fov_clustering.normal_weight: 1.0
+    regions.fov_clustering.number_of_runs: 10
+    regions.fov_clustering.point_weight: 1.0
+    regions.fov_clustering.ppsqmm: 0.10000000149011612
+    regions.region_growth.batch_size: 1000
+    regions.region_growth.curvature_threshold: 0.10000000149011612
+    regions.region_growth.knn_neighbors: 30
     regions.region_growth.max_cluster_size: 100000
-    regions.region_growth.min_cluster_size: 100
-    regions.region_growth.normal_angle_threshold: 95.09500122070312
-    regions.region_growth.seed_threshold: 0.1
-    settings.cuda_enabled: false
+    regions.region_growth.min_cluster_size: 10
+    regions.region_growth.normal_angle_threshold: 1.0471975803375244
+    regions.region_growth.outlier_nb_neighbors: 20
+    regions.region_growth.outlier_std_ratio: 0.10000000149011612
+    regions.region_growth.radius: 0.009999999776482582
+    regions.region_growth.region_threshold: 0.20000000298023224
+    regions.region_growth.remove_statistical_outliers: false
+    regions.region_growth.seed_threshold: 0.10000000149011612
+    regions.region_growth.spatial_hash_resolution: 0.0010000000474974513
+    regions.region_growth.use_spatial_hashing: true
+    results.file: /data/ViewpointGenerationData/stanford_bunny_mm/10000points_results/25_regions_133_clusters_2026-03-03_01-17-39.json
     settings.data_path: /data/ViewpointGenerationData
     settings.planning_volume_opacity: 0.0
-    use_sim_time: false
-    viewpoints.projection.nothing: ''
+    viewpoints.projection.focal_distance: 0.10000000149011612
+    viewpoints.projection.hemisphere_points: 10000
     viewpoints.traversal: ''
-    visualize: false
-viewpoint_traversal:
-  ros__parameters:
-    clear_paths: false
-    compare: false
-    compare_algorithms: 2opt
-    multiplanning: false
-    planner: ompl
-    planning_group: disc_to_ur5e
-    tsp_algorithm: greedy
-    use_sim_time: false
-    workspace.max_x: 1.0
-    workspace.max_y: 1.0
-    workspace.max_z: 1.0
-    workspace.min_x: -1.0
-    workspace.min_y: -1.0
-    workspace.min_z: -1.0
