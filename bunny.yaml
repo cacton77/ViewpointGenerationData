@@ -49,7 +49,11 @@ viewpoint_generation:
     regions.region_growth.use_spatial_hashing: true
     results.file: /data/ViewpointGenerationData/stanford_bunny_mm/10000pointsmm_results/24_regions_175_clusters_2026-03-03_03-24-31.json
     settings.data_path: /data/ViewpointGenerationData
-    settings.planning_volume_opacity: 0.0
+    settings.pv_opacity: 0.0
     viewpoints.projection.focal_distance: 0.31200000643730164
     viewpoints.projection.hemisphere_points: 10000
     viewpoints.traversal: ''
+task_planning:
+  ros__parameters:
+    settings.data_path: /data/ViewpointGenerationData
+    settings.pv_opacity: 0.0
