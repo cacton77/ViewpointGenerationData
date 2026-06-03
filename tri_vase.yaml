@@ -8,6 +8,7 @@ admittance_control:
     publish_rate: 10.0
     sphere_mass: 2.5
     sphere_radius: 0.65
+    start_type_description_service: true
     twist_topic: /servo_node/delta_twist_cmds
     wrench_orientation_topic: /orientation_controller/wrench_cmds
     wrench_teleop_topic: /teleop/wrench_cmds
@@ -29,6 +30,7 @@ gui:
     show_regions: true
     show_skybox: true
     show_viewpoints: true
+    start_type_description_service: true
 orientation_controller:
   ros__parameters:
     Kd: 6.2
@@ -49,7 +51,7 @@ orientation_controller:
     d_max: 0.3
     d_min: 0.15
     data_path: /data/OrientationControlData
-    depth_topic: /particle_filter/depth/synthetic/compressedDepth
+    depth_topic: /camera/d405_camera/depth/image_rect_raw/compressedDepth
     dmap_filter_max: 0.5
     dmap_filter_min: 0.07
     ema_enable: false
@@ -84,6 +86,7 @@ orientation_controller:
     sphere_radius: 0.65
     standoff_m: 0.1
     standoff_mode: euclidean
+    start_type_description_service: true
     surface_normal_frame: surface_normal
     target_frame: object_frame
     theta_max_deg: 90.0
@@ -101,6 +104,7 @@ task_planning:
     - turntable_forward_position_controller
     servo_node_name: servo_node
     settings.data_path: /data/ViewpointGenerationData
+    start_type_description_service: true
     trajectory_controllers:
     - inspection_cell_controller
     viewpoints_file: ''
@@ -121,6 +125,7 @@ teleop:
     publish_rate: 10.0
     roll_axis_negative: 2
     roll_axis_positive: 3
+    start_type_description_service: true
     torque_scale: 0.5
     twist_topic: /teleop/wrench_cmds
     x_axis: 0
@@ -131,9 +136,9 @@ teleop:
     z_axis_push: 5
 viewpoint_generation:
   ros__parameters:
-    model.mesh.file: /data/ViewpointGenerationData/stanford_bunny.stl
+    model.mesh.file: /data/ViewpointGenerationData/tri_vase.stl
     model.mesh.units: mm
-    model.point_cloud.file: /data/ViewpointGenerationData/stanford_bunny_mm/1000points.ply
+    model.point_cloud.file: /data/ViewpointGenerationData/tri_vase_mm/1000points.ply
     model.point_cloud.sampling.number_of_points: 1000
     model.point_cloud.units: m
     regions.fov_clustering.beta_weight: 1.0
@@ -160,12 +165,13 @@ viewpoint_generation:
     regions.region_growth.seed_threshold: 0.10000000149011612
     regions.region_growth.spatial_hash_resolution: 0.05000000074505806
     regions.region_growth.use_spatial_hashing: true
-    results.file: /tmp/2026-03-16_20-34-38.json
+    results.file: /tmp/2026-05-26_22-26-33.json
     results.selected_cluster: 0
     results.selected_mesh: 0
     results.selected_region: 0
     settings.data_path: /data/ViewpointGenerationData
     settings.pv_opacity: 0.0
+    start_type_description_service: true
     viewpoints.projection.focal_distance: 0.30000001192092896
     viewpoints.projection.hemisphere_points: 10000
 viewpoint_traversal:
@@ -176,6 +182,7 @@ viewpoint_traversal:
     multiplanning: false
     planner: ompl
     planning_group: disc_to_ur5e
+    start_type_description_service: true
     tsp_algorithm: greedy
     workspace.max_x: 1.0
     workspace.max_y: 1.0
