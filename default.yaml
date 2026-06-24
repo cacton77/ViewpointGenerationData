@@ -13,7 +13,7 @@ gui:
     show_point_cloud: true
     show_region_view_manifolds: true
     show_regions: true
-    show_skybox: true
+    show_skybox: false
     show_viewpoints: true
 viewpoint_generation:
   ros__parameters:
