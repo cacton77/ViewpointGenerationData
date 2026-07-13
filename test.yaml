@@ -49,7 +49,6 @@ gui:
     show_curvatures: true
     show_fov_clusters: true
     show_grid: false
-    show_joint_path: true
     show_mesh: true
     show_model_bounding_box: false
     show_noise_points: true
@@ -58,7 +57,6 @@ gui:
     show_region_view_manifolds: true
     show_regions: true
     show_skybox: false
-    show_unreachable: true
     show_viewpoints: true
 orientation_controller:
   ros__parameters:
@@ -142,7 +140,7 @@ task_planning:
     navigation.selected_traversal_algorithm: ''
     navigation.selected_viewpoint: 0
     settings.data_path: /data/ViewpointGenerationData
-    settings.results_file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_167_clusters_2026-07-02_22-57-30_optimized2026-07-02_22-58-52.json
+    settings.results_file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_167_clusters_2026-06-30_21-07-47.json
 teleop:
   ros__parameters:
     deadzone: 0.05
@@ -253,7 +251,7 @@ viewpoint_generation:
     regions.region_growth.spatial_hash_resolution: 0.05000000074505806
     regions.region_growth.use_spatial_hashing: true
     regions.segmentation_algorithm: partfield
-    results.file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_167_clusters_2026-07-02_22-57-30_optimized2026-07-02_22-58-52.json
+    results.file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_167_clusters_2026-06-30_21-07-47.json
     settings.data_path: /data/ViewpointGenerationData
     settings.pv_opacity: 0.0
     viewpoints.projection.focal_distance: 0.30000001192092896
@@ -265,20 +263,6 @@ viewpoint_traversal:
     planner: ompl
     planning_group: disc_to_ur5e
     tsp_algorithm: greedy
-    vrp_aco_alpha: 1.0
-    vrp_aco_beta: 2.0
-    vrp_aco_n_ants: 20
-    vrp_aco_n_iter: 100
-    vrp_aco_rho: 0.1
-    vrp_algorithm: ''
-    vrp_joint_weights:
-    - 0.5
-    - 1.0
-    - 1.0
-    - 1.0
-    - 1.0
-    - 1.0
-    - 1.0
     workspace.max_x: 1.0
     workspace.max_y: 1.0
     workspace.max_z: 1.0

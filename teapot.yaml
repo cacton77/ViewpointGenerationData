@@ -11,7 +11,6 @@ admittance_control:
     servo_twist_topic: /servo_node/delta_twist_cmds
     sphere_mass: 2.5
     sphere_radius: 0.65
-    start_type_description_service: true
     teleop_wrench_topic: /teleop/wrench_cmds
 autofocus:
   ros__parameters:
@@ -38,7 +37,6 @@ autofocus:
     roi_y: 0.5
     sphere_mass: 2.5
     sphere_radius: 0.65
-    start_type_description_service: true
     v_max: 0.05
     visualize: true
     wrench_topic: /autofocus/wrench_cmds
@@ -51,16 +49,16 @@ gui:
     show_curvatures: true
     show_fov_clusters: true
     show_grid: false
+    show_joint_path: true
     show_mesh: true
     show_model_bounding_box: false
     show_noise_points: true
     show_path: false
     show_point_cloud: true
-    show_region_view_manifolds: true
     show_regions: true
-    show_skybox: true
+    show_skybox: false
+    show_unreachable: true
     show_viewpoints: true
-    start_type_description_service: true
 orientation_controller:
   ros__parameters:
     Kd: 6.2
@@ -118,12 +116,11 @@ orientation_controller:
     sphere_radius: 0.65
     standoff_m: 0.1
     standoff_mode: euclidean
-    start_type_description_service: true
     surface_cloud_topic: /perception/surface_cloud
     surface_max_angle_deg: 30.0
     surface_min_points: 10
     surface_normal_frame: surface_normal
-    surface_source: cloud
+    surface_source: depth
     target_frame: object_frame
     theta_max_deg: 90.0
     v_max: 0.1
@@ -132,18 +129,19 @@ orientation_controller:
     zeta: 1.0
 task_planning:
   ros__parameters:
-    controller_manager_name: /controller_manager
-    selected_region: 0
-    selected_viewpoint: 0
-    servo_controllers:
+    controllers.controller_manager_name: /controller_manager
+    controllers.servo_controllers:
     - ur5e_forward_velocity_controller
     - turntable_forward_position_controller
-    servo_node_name: servo_node
-    settings.data_path: /data/ViewpointGenerationData
-    start_type_description_service: true
-    trajectory_controllers:
+    controllers.servo_node_name: servo_node
+    controllers.trajectory_controllers:
     - inspection_cell_controller
-    viewpoints_file: ''
+    navigation.selected_mesh: 0
+    navigation.selected_region: 3
+    navigation.selected_traversal_algorithm: vrp_greedy
+    navigation.selected_viewpoint: 0
+    settings.data_path: /data/ViewpointGenerationData
+    settings.results_file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_447_clusters_2026-06-30_22-08-36_optimized2026-07-02_23-38-41.json
 teleop:
   ros__parameters:
     deadzone: 0.05
@@ -161,7 +159,6 @@ teleop:
     publish_rate: 10.0
     roll_axis_negative: 4
     roll_axis_positive: 5
-    start_type_description_service: true
     torque_scale: 0.4
     twist_topic: /teleop/wrench_cmds
     x_axis: 0
@@ -170,16 +167,63 @@ teleop:
     z_axis: -1
     z_axis_pull: 2
     z_axis_push: 5
+tsdf_pose:
+  ros__parameters:
+    block_count: 10000
+    block_resolution: 16
+    crop_enabled: true
+    crop_max:
+    - 0.5
+    - 0.5
+    - 1.0
+    crop_min:
+    - -0.5
+    - -0.5
+    - 0.01
+    depth_max: 0.5
+    depth_max_integration: 0.5
+    depth_min: 0.07
+    extract_weight_threshold: 10.0
+    fpfh_radius_mult: 5.0
+    fused_cloud_topic: tsdf_pose/fused_cloud
+    fused_voxel_size: 0.003
+    fusion_frame: object_frame
+    icp_distance_mult: 1.5
+    icp_fitness_min: 0.3
+    icp_max_iterations: 50
+    integrate_every_n_frames: 1
+    integration_device: CUDA:0
+    min_integrations_before_register: 10
+    model_frame: model_frame
+    normal_radius_mult: 2.0
+    pose_topic: tsdf_pose/pose
+    publish_tf: true
+    ransac_confidence: 0.999
+    ransac_distance_mult: 1.5
+    ransac_max_iterations: 100000
+    reference_voxel_size: 0.003
+    register_every_n_frames: 30
+    registration_enabled: false
+    sdf_trunc_mult: 4.0
+    surface_cloud_topic: /perception/surface_cloud
+    surface_publish_every_n_frames: 10
+    synthetic_depth_topic: tsdf_pose/depth/synthetic
+    viewpoint_generation_node: viewpoint_generation
+    voxel_size: 0.003
+    world_frame: world
 viewpoint_generation:
   ros__parameters:
     model.mesh.file: /data/ViewpointGenerationData/teapot.stl
     model.mesh.units: in
-    model.point_cloud.file: /data/ViewpointGenerationData/teapot_in/10000points.ply
+    model.point_cloud.file: ''
     model.point_cloud.sampling.number_of_points: 100000
     model.point_cloud.units: m
+    regions.fov_clustering.algorithm: greedy_cover
     regions.fov_clustering.beta_weight: 1.0
-    regions.fov_clustering.dof: 0.019999999552965164
-    regions.fov_clustering.fov_diameter: 0.029999999329447746
+    regions.fov_clustering.candidate_spacing: 0.0
+    regions.fov_clustering.dof: 0.0010000000474974513
+    regions.fov_clustering.fov_diameter: 0.02800000086426735
+    regions.fov_clustering.fov_normal_threshold: 0.7853981852531433
     regions.fov_clustering.lambda_weight: 1.0
     regions.fov_clustering.max_point_out_percentage: 0.001
     regions.fov_clustering.maximum_iterations: 100
@@ -187,6 +231,8 @@ viewpoint_generation:
     regions.fov_clustering.number_of_runs: 10
     regions.fov_clustering.point_density: 10.0
     regions.fov_clustering.point_weight: 1.0
+    regions.fov_clustering.prune_redundant: false
+    regions.fov_clustering.rng_seed: 0
     regions.partfield.num_parts: 6
     regions.partfield.option: 0
     regions.partfield.use_agglo: true
@@ -206,32 +252,32 @@ viewpoint_generation:
     regions.region_growth.spatial_hash_resolution: 0.05000000074505806
     regions.region_growth.use_spatial_hashing: true
     regions.segmentation_algorithm: partfield
-    results.file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_96_clusters_2026-06-23_22-40-03.json
-    results.selected_cluster: 0
-    results.selected_mesh: 0
-    results.selected_region: 0
+    results.file: /data/ViewpointGenerationData/teapot_in/10000pointsin_results/6_regions_447_clusters_2026-06-30_22-08-36_optimized2026-07-02_23-38-41.json
     settings.data_path: /data/ViewpointGenerationData
     settings.pv_opacity: 0.0
-    start_type_description_service: true
     viewpoints.projection.focal_distance: 0.30000001192092896
     viewpoints.projection.hemisphere_points: 10000
 viewpoint_traversal:
   ros__parameters:
     clear_paths: false
-    compare: false
-    compare_algorithms: -- none --
     multiplanning: false
     planner: ompl
     planning_group: disc_to_ur5e
-    result.compare_algorithm: ''
-    result.compare_distance: -1.0
-    result.max_region_gap_pct: -1.0
-    result.mst_lower_bound: -1.0
-    result.optimality_gap_pct: -1.0
-    result.primary_algorithm: ''
-    result.primary_distance: -1.0
-    start_type_description_service: true
-    tsp_algorithm: greedy
+    tsp_algorithm: Select Algorithm
+    vrp_aco_alpha: 1.0
+    vrp_aco_beta: 2.0
+    vrp_aco_n_ants: 20
+    vrp_aco_n_iter: 100
+    vrp_aco_rho: 0.1
+    vrp_algorithm: vrp_greedy
+    vrp_joint_weights:
+    - 0.5
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
     workspace.max_x: 1.0
     workspace.max_y: 1.0
     workspace.max_z: 1.0
