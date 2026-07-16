@@ -44,7 +44,7 @@ autofocus:
 gui:
   ros__parameters:
     data_path: /data/ViewpointGenerationData
-    file_name: default
+    file_name: square_pipe
     show_axes: false
     show_blind_spots: true
     show_curvatures: true
@@ -135,11 +135,11 @@ task_planning:
     controllers.trajectory_controllers:
     - inspection_cell_controller
     navigation.selected_mesh: 0
-    navigation.selected_region: 4
+    navigation.selected_region: 6
     navigation.selected_traversal_algorithm: ''
-    navigation.selected_viewpoint: 30
+    navigation.selected_viewpoint: 0
     settings.data_path: /data/ViewpointGenerationData
-    settings.results_file: /data/ViewpointGenerationData/sandia_partmm_results/5_regions_88_clusters_2026-07-15_18-07-12_optimized2026-07-15_18-08-01.json
+    settings.results_file: /data/ViewpointGenerationData/square_tubein_results/10_regions_171_clusters_2026-07-15_23-23-52_optimized2026-07-15_23-33-04.json
 teleop:
   ros__parameters:
     deadzone: 0.05
@@ -218,8 +218,8 @@ viewpoint_generation:
     fov_clustering.algorithm: greedy_cover
     fov_clustering.beta_weight: 1.0
     fov_clustering.candidate_spacing: 0.0
-    fov_clustering.dof: 0.0010000000474974513
-    fov_clustering.fov_diameter: 0.009999999776482582
+    fov_clustering.dof: 0.009999999776482582
+    fov_clustering.fov_diameter: 0.029999999329447746
     fov_clustering.fov_normal_threshold: 0.7853981852531433
     fov_clustering.lambda_weight: 1.0
     fov_clustering.max_point_out_percentage: 0.001
@@ -231,22 +231,26 @@ viewpoint_generation:
     fov_clustering.point_density: 0.5
     fov_clustering.point_weight: 1.0
     fov_clustering.prune_redundant: true
+    fov_clustering.rescue_samples: 64
+    fov_clustering.rescue_search: true
     fov_clustering.rng_seed: 0
-    model.mesh.file: /data/ViewpointGenerationData/sandia_part.stl
-    model.mesh.units: mm
+    fov_clustering.structured_candidates: true
+    model.mesh.file: /data/ViewpointGenerationData/square_tube.stl
+    model.mesh.units: in
     model.point_cloud.file: ''
     model.point_cloud.units: m
-    regions.algorithm: partfield
+    regions.algorithm: region_growth
     regions.partfield.num_parts: 5
     regions.partfield.option: 0
     regions.partfield.use_agglo: true
     regions.partfield.with_knn: false
-    regions.region_growth.curvature_threshold: 0.10000000149011612
+    regions.region_growth.curvature_threshold: 0.5
     regions.region_growth.max_cluster_size: 100000
-    regions.region_growth.min_cluster_size: 10
+    regions.region_growth.min_cluster_size: 2
     regions.region_growth.normal_angle_threshold: 1.0471975803375244
-    regions.region_growth.seed_threshold: 0.10000000149011612
-    results.file: /data/ViewpointGenerationData/sandia_partmm_results/5_regions_88_clusters_2026-07-15_18-07-12_optimized2026-07-15_18-08-01.json
+    regions.region_growth.seed_threshold: 0.699999988079071
+    regions.region_growth.weld_epsilon: 9.999999974752427e-07
+    results.file: /data/ViewpointGenerationData/square_tubein_results/10_regions_171_clusters_2026-07-15_23-23-52_optimized2026-07-15_23-33-04.json
     settings.data_path: /data/ViewpointGenerationData
     settings.pv_opacity: 0.0
     viewpoints.projection.focal_distance: 0.30000001192092896
@@ -257,7 +261,7 @@ viewpoint_traversal:
     multiplanning: false
     planner: ompl
     planning_group: disc_to_ur5e
-    tsp_algorithm: greedy
+    tsp_algorithm: LKH
     vrp_aco_alpha: 1.0
     vrp_aco_beta: 2.0
     vrp_aco_n_ants: 20
